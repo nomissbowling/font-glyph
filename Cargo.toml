@@ -1,0 +1,29 @@
+[package]
+name = "font-glyph"
+version = "0.1.0" # change with html_root_url in main.rs
+edition = "2021"
+authors = ["nomissbowling <nomissbowling@yahoo.co.jp>"]
+
+description = "draw font glyph outline for Rust with plotters"
+keywords = ["font", "glyph", "plotters", "bezier", "interpolation"]
+categories = ["algorithms", "rendering", "science", "mathematics"]
+license = "MIT"
+
+documentation = "https://docs.rs/font-glyph/"
+homepage = "https://crates.io/crates/font-glyph"
+repository = "https://github.com/nomissbowling/font-glyph"
+
+readme = "README.md"
+
+#build = "build.rs"
+
+[dependencies]
+bezier-interpolation = { version = "0.2" }
+# bezier-interpolation = { version = "0.2", git = "https://github.com/nomissbowling/bezier-interpolation.git", package = "bezier-interpolation" }
+# bezier-interpolation = { path = "c:/prj/bezier-interpolation" }
+
+# freetype-rs = { version = "0.32.0" } # needless to link freetype.lib .dll
+freetype-rs = { version = "0.7" } # (with plotters) must link freetype.lib
+
+plotters = { version = "0.3.5" } # plotters => font-kit 0.11.0 => freetype 0.7
+image = { version = "0.24.6" }

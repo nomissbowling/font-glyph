@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/font-glyph/0.1.0")]
+#![doc(html_root_url = "https://docs.rs/font-glyph/0.3.0")]
 //! draw font glyph outline for Rust with plotters
 //!
 //! link freetype.lib

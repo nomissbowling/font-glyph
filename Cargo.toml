@@ -1,6 +1,6 @@
 [package]
 name = "font-glyph"
-version = "0.1.0" # change with html_root_url in main.rs
+version = "0.3.0" # change with html_root_url in main.rs
 edition = "2021"
 authors = ["nomissbowling <nomissbowling@yahoo.co.jp>"]
 
@@ -18,8 +18,8 @@ readme = "README.md"
 #build = "build.rs"
 
 [dependencies]
-bezier-interpolation = { version = "0.2" }
-# bezier-interpolation = { version = "0.2", git = "https://github.com/nomissbowling/bezier-interpolation.git", package = "bezier-interpolation" }
+bezier-interpolation = { version = "0.3" }
+# bezier-interpolation = { version = "0.3", git = "https://github.com/nomissbowling/bezier-interpolation.git", package = "bezier-interpolation" }
 # bezier-interpolation = { path = "c:/prj/bezier-interpolation" }
 
 # freetype-rs = { version = "0.32.0" } # needless to link freetype.lib .dll

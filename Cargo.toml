@@ -1,6 +1,6 @@
 [package]
 name = "font-glyph"
-version = "0.3.0" # change with html_root_url in main.rs
+version = "0.3.1" # change with html_root_url in main.rs
 edition = "2021"
 authors = ["nomissbowling <nomissbowling@yahoo.co.jp>"]
 
@@ -27,3 +27,5 @@ freetype-rs = { version = "0.7" } # (with plotters) must link freetype.lib
 
 plotters = { version = "0.3.5" } # plotters => font-kit 0.11.0 => freetype 0.7
 image = { version = "0.24.6" }
+
+unicode-width = { version = "0.1.10" }

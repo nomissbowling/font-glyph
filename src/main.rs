@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/font-glyph/0.3.0")]
+#![doc(html_root_url = "https://docs.rs/font-glyph/0.3.1")]
 //! draw font glyph outline for Rust with plotters
 //!
 //! link freetype.lib
@@ -23,6 +23,8 @@ use plotters::backend::RGBPixel;
 use plotters::coord::Shift;
 
 // use std::f64::consts::PI;
+
+use unicode_width::UnicodeWidthStr;
 
 /// manager
 pub struct FreeTypeManager<'a> {
@@ -88,7 +90,9 @@ impl FreeTypeManager<'_> {
   /// get glyph outline polygon and metrics
   pub fn glyph2poly(&mut self,
     cp: u32) -> Result<(Vec<GlyphContour>, ft::GlyphMetrics), Box<dyn Error>> {
-    print!("cp: 0x{:08x} {:2}", cp, char::from_u32(cp).unwrap());
+    let ch = char::from_u32(cp).ok_or("not unicode 32")?;
+    let sf = format!("{}", ch);
+    print!("cp: 0x{:08x} {}{}", cp, sf, if sf.width() == 1 {" "} else {""});
 
     // or NO_BITMAP
     // self.face.load_glyph(self.face.get_char_index(cp as usize), ...)?;
@@ -188,15 +192,15 @@ fn main() -> Result<(), Box<dyn Error>> {
   let ff = (0, "mikaP.ttf"); // (98304 98304 1536)
 //  let ff = (1, "mikachanALL.ttc"); // (98304 98304 1536) control points dif
 //  let ff = (1, "DFLgs9.ttc"); // (98304 98304 1536)
-//  let ff = (1, "msmincho.ttc"); // (393216 393216 1536) lr miss
-//  let ff = (1, "migu-1m-regular.ttf"); // (100663 100663 1728) lr miss
-//  let ff = (1, "migu-1p-regular.ttf"); // (100663 100663 2304) lr miss 2w
-//  let ff = (1, "ipaexm.ttf"); // (49152 49152 1536) lr miss 2w
-//  let ff = (1, "ipaexg.ttf"); // (49152 49152 1536) lr miss 2w
-//  let ff = (1, "meiryo.ttc"); // (49152 49152 2304) lr miss 2w
-//  let ff = (1, "MochiyPopOne-Regular.ttf"); // (100663 100663 1792) lr m 2w
-//  let ff = (1, "MochiyPopPOne-Regular.ttf"); // (100663 100663 1792) 2w
-//  let ff = (1, "FiraSans-Regular.ttf"); // (100663 100663 2176) lr miss no JP
+//  let ff = (1, "msmincho.ttc"); // (393216 393216 1536)
+//  let ff = (1, "migu-1m-regular.ttf"); // (100663 100663 1728)
+//  let ff = (1, "migu-1p-regular.ttf"); // (100663 100663 2304)
+//  let ff = (1, "ipaexm.ttf"); // (49152 49152 1536)
+//  let ff = (1, "ipaexg.ttf"); // (49152 49152 1536)
+//  let ff = (1, "meiryo.ttc"); // (49152 49152 2304)
+//  let ff = (1, "MochiyPopOne-Regular.ttf"); // (100663 100663 1792)
+//  let ff = (1, "MochiyPopPOne-Regular.ttf"); // (100663 100663 1792)
+//  let ff = (1, "FiraSans-Regular.ttf"); // (100663 100663 2176) no JP
 //  let ff = (1, "times.ttf"); // (49152 49152 1792) no JP 2w kern ok
   let pf = path::Path::new(bases[ff.0]).join(ff.1); // keep temp bind
   let fname = pf.to_str().unwrap();
